@@ -1,12 +1,18 @@
 import 'package:bot_toast/bot_toast.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:pixiv/config/provider_manager.dart';
 import 'package:pixiv/generated/l10n.dart';
 import 'package:pixiv/main.dart';
+import 'package:pixiv/model/user_detail.dart';
+import 'package:pixiv/net/api_client.dart';
 import 'package:pixiv/store/login_store.dart';
 import 'package:pixiv/ui/login/login_widget.dart';
 import 'package:pixiv/ui/main/main_tab.dart';
 import 'package:pixiv/utils/platform_utils.dart';
+import 'package:pixiv/view_model/user_model.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LoginPage extends StatefulWidget {
@@ -124,6 +130,9 @@ class _LoginPageState extends State<LoginPage> {
     bool isAuth = await _loginStore.auth(_nameController.value.text.trim(), _passwordController.value.text.trim());
     if (isAuth) {
       await accountStore.fetch();
+      Response response = await apiClient.getUser(accountStore.now.id);
+      UserDetail userDetail = UserDetail.fromJson(response.data);
+      accountStore.userDetail = userDetail;
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (BuildContext context) => Platform.isIOS ? AndroidHelloPage() : AndroidHelloPage()),
         (route) => route == null,

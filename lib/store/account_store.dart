@@ -1,9 +1,11 @@
 import 'package:pixiv/model/account.dart';
+import 'package:pixiv/model/user_detail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AccountStore {
   AccountProvider accountProvider = new AccountProvider();
   AccountPersist now;
+  UserDetail userDetail;
   int index = 0;
 
   List<AccountPersist> accounts = new List<AccountPersist>();

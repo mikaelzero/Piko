@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:pixiv/main.dart';
 import 'package:pixiv/model/illust.dart';
 import 'package:pixiv/model/recommend.dart';
 import 'package:pixiv/model/user_detail.dart';
@@ -26,6 +27,7 @@ class UserViewModel extends ViewStateModel {
       this.isFollow = this.userDetail.user.is_followed;
       if (isFetchSelf) {
         await UserStore.setUserData(this.userDetail);
+        accountStore.userDetail = userDetail;
       }
       setIdle();
     } on DioError catch (e) {

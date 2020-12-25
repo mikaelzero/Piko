@@ -329,8 +329,8 @@ class ApiClient {
 
   Future<Response> getPopularPreview(String keyword) async {
     String a = httpClient.options.baseUrl;
-    String previewUrl =
-        '${a}/v1/search/popular-preview/illust?filter=for_android&include_translated_tag_results=true&merge_plain_keyword_results=true&word=${keyword}&search_target=partial_match_for_tags';
+    String previewUrl = '${a}/v1/search/popular-preview/illust?filter=for_android&include_translated_tag_results=true&' +
+        'merge_plain_keyword_results=true&word=${keyword}&search_target=partial_match_for_tags';
     final result = await httpClient.get(previewUrl);
     return result;
   }

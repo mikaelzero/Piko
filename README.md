@@ -1,6 +1,6 @@
 # Piko(Pixiv third client)
 
-第三方pixiv客户端，flutter开发
+第三方pixiv客户端，flutter开发，基于flutter 版本  **1.23.0-18.1.pre**
 
 
 ## 基本功能
